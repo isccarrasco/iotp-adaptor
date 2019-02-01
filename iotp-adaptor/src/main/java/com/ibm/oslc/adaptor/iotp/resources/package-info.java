@@ -36,7 +36,17 @@
     @OslcNamespaceDefinition(prefix = Oslc_iotDomainConstants.IOT_PLATFORM_NAMSPACE_PREFIX, namespaceURI = Oslc_iotDomainConstants.IOT_PLATFORM_NAMSPACE),
     @OslcNamespaceDefinition(prefix = OslcDomainConstants.OSLC_NAMSPACE_PREFIX, namespaceURI = OslcDomainConstants.OSLC_NAMSPACE),
     @OslcNamespaceDefinition(prefix = RdfDomainConstants.RDF_NAMSPACE_PREFIX, namespaceURI = RdfDomainConstants.RDF_NAMSPACE),
-    @OslcNamespaceDefinition(prefix = Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE_PREFIX, namespaceURI = Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE)
+    @OslcNamespaceDefinition(prefix = Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE_PREFIX, namespaceURI = Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE),
+    @OslcNamespaceDefinition(prefix = "rmWorkflow", namespaceURI = "http://www.ibm.com/xmlns/rdm/workflow/"),
+    @OslcNamespaceDefinition(prefix = "dcterms", namespaceURI = "http://purl.org/dc/terms/"),
+    @OslcNamespaceDefinition(prefix = "dc", namespaceURI = "http://purl.org/dc/elements/1.1/"),
+    @OslcNamespaceDefinition(prefix = "jfs", namespaceURI = "http://jazz.net/xmlns/foundation/1.0/"),
+    @OslcNamespaceDefinition(prefix = "h", namespaceURI = "http://www.w3.org/TR/REC-html40"),
+    @OslcNamespaceDefinition(prefix = "xs", namespaceURI = "http://schema.w3.org/xs/"),
+    @OslcNamespaceDefinition(prefix = "rm", namespaceURI = "http://www.ibm.com/xmlns/rdm/rdf/"),
+    @OslcNamespaceDefinition(prefix = "jp", namespaceURI = "http://jazz.net/xmlns/prod/jazz/process/1.0/"),
+    @OslcNamespaceDefinition(prefix = "rmTypes", namespaceURI = "http://www.ibm.com/xmlns/rdm/types/"),
+
 })
 package com.ibm.oslc.adaptor.iotp.resources;
 

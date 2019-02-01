@@ -31,6 +31,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
+import com.ibm.oslc.adaptor.iotp.resources.CustomServiceProvider;
 import org.eclipse.lyo.oslc4j.client.ServiceProviderRegistryURIs;
 import org.eclipse.lyo.oslc4j.core.exception.OslcCoreApplicationException;
 import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
@@ -65,16 +66,20 @@ public class BmxServiceProvidersFactory
         super();
     }
 
-    public static ServiceProvider createServiceProvider(final String baseURI, final String title, final String description, final Publisher publisher, final Map<String,Object> parameterValueMap)
+    public static CustomServiceProvider createServiceProvider(final String baseURI, final String title, final String description, final Publisher publisher, final Map<String,Object> parameterValueMap)
            throws OslcCoreApplicationException, URISyntaxException
     {
-        final ServiceProvider serviceProvider = ServiceProviderFactory.createServiceProvider(baseURI,
+        final ServiceProvider sp = ServiceProviderFactory.createServiceProvider(baseURI,
                                                     ServiceProviderRegistryURIs.getUIURI(),
                                                     title,
                                                     description,
                                                     publisher,
                                                     RESOURCE_CLASSES,
                                                     parameterValueMap);
+
+        final CustomServiceProvider serviceProvider = new CustomServiceProvider();
+        serviceProvider.toCustomServiceProvider(sp);
+
         URI detailsURIs[] = {new URI(baseURI)};
         serviceProvider.setDetails(detailsURIs);
 

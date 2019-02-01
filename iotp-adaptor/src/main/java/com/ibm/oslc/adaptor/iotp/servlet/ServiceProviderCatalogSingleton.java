@@ -42,10 +42,9 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 
-import org.eclipse.lyo.oslc4j.client.ServiceProviderRegistryURIs;
+import com.ibm.oslc.adaptor.iotp.resources.CustomServiceProvider;
 import org.eclipse.lyo.oslc4j.core.model.Publisher;
 import org.eclipse.lyo.oslc4j.core.model.Service;
-import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProviderCatalog;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 
@@ -72,7 +71,7 @@ import com.ibm.oslc.adaptor.iotp.BmxServiceProviderInfo;
 public class ServiceProviderCatalogSingleton
 {
     private static final ServiceProviderCatalog serviceProviderCatalog;
-    private static final SortedMap<String, ServiceProvider> serviceProviders = new TreeMap<String, ServiceProvider>();
+    private static final SortedMap<String, CustomServiceProvider> serviceProviders = new TreeMap<String, CustomServiceProvider>();
 
     static {
         serviceProviderCatalog = new ServiceProviderCatalog();
@@ -99,12 +98,12 @@ public class ServiceProviderCatalogSingleton
         return serviceProviderCatalog;
     }
 
-    public static ServiceProvider [] getServiceProviders(HttpServletRequest httpServletRequest)
+    public static CustomServiceProvider [] getServiceProviders(HttpServletRequest httpServletRequest)
     {
         synchronized(serviceProviders)
         {
             initServiceProviders(httpServletRequest);
-            return serviceProviders.values().toArray(new ServiceProvider[ serviceProviders.size()]);
+            return serviceProviders.values().toArray(new CustomServiceProvider[ serviceProviders.size()]);
         }
     }
 
@@ -126,9 +125,9 @@ public class ServiceProviderCatalogSingleton
         return identifier;
     }
 
-    public static ServiceProvider getIotpServiceProvider(HttpServletRequest httpServletRequest, final String iotId)
+    public static CustomServiceProvider getIotpServiceProvider(HttpServletRequest httpServletRequest, final String iotId)
     {
-        ServiceProvider serviceProvider;
+        CustomServiceProvider serviceProvider;
 
         synchronized(serviceProviders)
         {
@@ -151,8 +150,8 @@ public class ServiceProviderCatalogSingleton
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 
-    public static ServiceProvider registerIotpServiceProvider(final HttpServletRequest httpServletRequest,
-                                                          final ServiceProvider serviceProvider,
+    public static CustomServiceProvider registerIotpServiceProvider(final HttpServletRequest httpServletRequest,
+                                                          final CustomServiceProvider serviceProvider,
                                                           final String iotId)
                                                 throws URISyntaxException
     {
@@ -170,11 +169,11 @@ public class ServiceProviderCatalogSingleton
     *
     * @param serviceProviderURI
     * @param serviceProvider
-    * @param productId
+    * @param iotId
     * @return
     */
-    private static ServiceProvider registerIotpServiceProviderNoSync(final URI serviceProviderURI,
-                                                                 final ServiceProvider serviceProvider
+    private static CustomServiceProvider registerIotpServiceProviderNoSync(final URI serviceProviderURI,
+                                                                 final CustomServiceProvider serviceProvider
                                                                  , final String iotId)
     {
         final SortedSet<URI> serviceProviderDomains = getServiceProviderDomains(serviceProvider);
@@ -194,7 +193,7 @@ public class ServiceProviderCatalogSingleton
     }
 
     // This version is for self-registration and thus package-protected
-    static ServiceProvider registerIotpServiceProvider(final ServiceProvider serviceProvider, final String iotId)
+    static CustomServiceProvider registerIotpServiceProvider(final CustomServiceProvider serviceProvider, final String iotId)
                                             throws URISyntaxException
     {
         synchronized(serviceProviders)
@@ -209,14 +208,14 @@ public class ServiceProviderCatalogSingleton
     {
         synchronized(serviceProviders)
         {
-            final ServiceProvider deregisteredServiceProvider =
+            final CustomServiceProvider deregisteredServiceProvider =
                 serviceProviders.remove(iotpServiceProviderIdentifier(iotId));
 
             if (deregisteredServiceProvider != null)
             {
                 final SortedSet<URI> remainingDomains = new TreeSet<URI>();
 
-                for (final ServiceProvider remainingServiceProvider : serviceProviders.values())
+                for (final CustomServiceProvider remainingServiceProvider : serviceProviders.values())
                 {
                     remainingDomains.addAll(getServiceProviderDomains(remainingServiceProvider));
                 }
@@ -251,9 +250,9 @@ public class ServiceProviderCatalogSingleton
         return identifier;
     }
 
-    public static ServiceProvider getBmxServiceProvider(HttpServletRequest httpServletRequest, final String bmxId)
+    public static CustomServiceProvider getBmxServiceProvider(HttpServletRequest httpServletRequest, final String bmxId)
     {
-        ServiceProvider serviceProvider;
+        CustomServiceProvider serviceProvider;
 
         synchronized(serviceProviders)
         {
@@ -276,8 +275,8 @@ public class ServiceProviderCatalogSingleton
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 
-    public static ServiceProvider registerBmxServiceProvider(final HttpServletRequest httpServletRequest,
-                                                          final ServiceProvider serviceProvider,
+    public static CustomServiceProvider registerBmxServiceProvider(final HttpServletRequest httpServletRequest,
+                                                          final CustomServiceProvider serviceProvider,
                                                           final String bmxId)
                                                 throws URISyntaxException
     {
@@ -295,11 +294,11 @@ public class ServiceProviderCatalogSingleton
     *
     * @param serviceProviderURI
     * @param serviceProvider
-    * @param productId
+    * @param bmxId
     * @return
     */
-    private static ServiceProvider registerBmxServiceProviderNoSync(final URI serviceProviderURI,
-                                                                 final ServiceProvider serviceProvider
+    private static CustomServiceProvider registerBmxServiceProviderNoSync(final URI serviceProviderURI,
+                                                                 final CustomServiceProvider serviceProvider
                                                                  , final String bmxId)
     {
         final SortedSet<URI> serviceProviderDomains = getServiceProviderDomains(serviceProvider);
@@ -319,7 +318,7 @@ public class ServiceProviderCatalogSingleton
     }
 
     // This version is for self-registration and thus package-protected
-    static ServiceProvider registerBmxServiceProvider(final ServiceProvider serviceProvider, final String bmxId)
+    static CustomServiceProvider registerBmxServiceProvider(final CustomServiceProvider serviceProvider, final String bmxId)
                                             throws URISyntaxException
     {
         synchronized(serviceProviders)
@@ -334,14 +333,14 @@ public class ServiceProviderCatalogSingleton
     {
         synchronized(serviceProviders)
         {
-            final ServiceProvider deregisteredServiceProvider =
+            final CustomServiceProvider deregisteredServiceProvider =
                 serviceProviders.remove(bmxServiceProviderIdentifier(bmxId));
 
             if (deregisteredServiceProvider != null)
             {
                 final SortedSet<URI> remainingDomains = new TreeSet<URI>();
 
-                for (final ServiceProvider remainingServiceProvider : serviceProviders.values())
+                for (final CustomServiceProvider remainingServiceProvider : serviceProviders.values())
                 {
                     remainingDomains.addAll(getServiceProviderDomains(remainingServiceProvider));
                 }
@@ -359,7 +358,7 @@ public class ServiceProviderCatalogSingleton
         }
     }
 
-    private static SortedSet<URI> getServiceProviderDomains(final ServiceProvider serviceProvider)
+    private static SortedSet<URI> getServiceProviderDomains(final CustomServiceProvider serviceProvider)
     {
         final SortedSet<URI> domains = new TreeSet<URI>();
 
@@ -372,6 +371,9 @@ public class ServiceProviderCatalogSingleton
                 domains.add(domain);
             }
         }
+
+        domains.add(URI.create("http://jazz.net/xmlns/prod/jazz/process/1.0/"));
+
         return domains;
     }
 
@@ -406,7 +408,7 @@ public class ServiceProviderCatalogSingleton
                     Publisher publisher = null;
                     Map<String, Object> parameterMap = new HashMap<String, Object>();
                     parameterMap.put("iotId", serviceProviderInfo.iotId);
-                    final ServiceProvider aServiceProvider = IotpServiceProvidersFactory.createServiceProvider(basePath, title, description, publisher, parameterMap);
+                    final CustomServiceProvider aServiceProvider = IotpServiceProvidersFactory.createServiceProvider(basePath, title, description, publisher, parameterMap);
                     registerIotpServiceProvider(aServiceProvider, serviceProviderInfo.iotId);
                 }
             }
@@ -425,7 +427,7 @@ public class ServiceProviderCatalogSingleton
                     Publisher publisher = null;
                     Map<String, Object> parameterMap = new HashMap<String, Object>();
                     parameterMap.put("bmxId", serviceProviderInfo.bmxId);
-                    final ServiceProvider aServiceProvider = BmxServiceProvidersFactory.createServiceProvider(basePath, title, description, publisher, parameterMap);
+                    final CustomServiceProvider aServiceProvider = BmxServiceProvidersFactory.createServiceProvider(basePath, title, description, publisher, parameterMap);
                     registerBmxServiceProvider(aServiceProvider, serviceProviderInfo.bmxId);
                 }
             }
