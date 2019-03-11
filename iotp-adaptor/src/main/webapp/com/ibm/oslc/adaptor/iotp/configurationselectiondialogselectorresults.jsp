@@ -50,7 +50,8 @@ To revert to the default generated content, delete all content in this file, and
   <% if (i > 0) { %>,<% } %>
   {
     "oslc:label" : "<%= r.toString() %>",
-    "rdf:resource" : "<%= r.getAbout() %>"
+    "rdf:resource" : "<%= r.getAbout() %>",
+    "rdf:type": "stream"
   }
 <% i++; } %>
 ]

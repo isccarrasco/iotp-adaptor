@@ -48,18 +48,18 @@ To revert to the default generated content, delete all content in this file, and
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <title>IotSelectionDialog</title>
-    <script type="text/javascript" src="<%=UriBuilder.fromUri(OSLC4JUtils.getPublicURI()).path("delegatedUItyped.js").build().toString()%>"></script>
+    <title>Configuratin Selection Dialog</title>
+    <script type="text/javascript" src="<%=UriBuilder.fromUri(OSLC4JUtils.getPublicURI()).path("configurationdelegatedUItyped.js").build().toString()%>"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script>
-  var selectionUri = {}
+  var selectionUri = {};
   $(document).ready(function() {
-	    var selectType = document.getElementById("selectType")
+	    var selectType = document.getElementById("selectType");
 	    $('#selectType').on('click', function load() {
 	    	var type = selectType.options[selectType.selectedIndex].value
 	    	selectionUri = '<%= selectionUri %>?type='+type  // provide the selected type as a query parameter
-	     })
-	     selectType.selectedIndex = 1
+	     });
+	     selectType.selectedIndex = 1;
 	     selectType.click()
 	  })
   </script>
@@ -67,23 +67,15 @@ To revert to the default generated content, delete all content in this file, and
   <body style="padding: 10px;">
     <div id="selector-body">
   Type: <select id="selectType">
-  	<option value="device">Device</option>
-  	<option value="devicetype">DeviceType</option>
-  	<option value="thing">Thing</option>
-  	<option value="thingtype">ThingType</option>
-  	<option value="logicalinterface">LogicalInterface</option>
-  	<option value="physicalinterface">PhysicalInterface</option>
-  	<option value="eventtype">EventType</option>
-  	<option value="schema">Schema</option>
-  	<option value="rule">Rule</option>  	
+  	<option value="stream">Streams</option>
+  	<option value="baseline">Baseline</option>
   </select>
-      <p id="searchMessage">Find a specific resource through a free-text search.</p>
+        <p id="searchMessage">Click on <b>Load</b> to retrieve the Streams from IoTP-Adaptor.</p>
 
-      <p id="loadingMessage" style="display: none;">Pondering your search. Please stand by ...</p>
+      <p id="loadingMessage" style="display: none;">Please stand by ...</p>
 
       <div>
-        <input type="search" style="width: 335px" id="searchTerms" placeholder="Enter search terms" autofocus>
-        <button type="button" onclick="search(selectionUri)">Search</button>
+        <button type="button" onclick="search(selectionUri)">Load</button>
       </div>
 
       <div style="margin-top: 5px;">
