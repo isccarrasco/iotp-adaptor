@@ -23,71 +23,49 @@ String catalogUri = (String) request.getAttribute("catalogUri");
 String oauthDomain = (String) request.getAttribute("oauthDomain");
 String about = (String) request.getAttribute("about");
 %>
+
 <rdf:Description rdf:about="<%= about %>"
-    xmlns:iotp="http://jazz.net/ns/dm/iotp#"
-    xmlns:oslc="http://open-services.net/ns/core#"
-    xmlns:oslc_am="http://open-services.net/ns/am#"
-    xmlns:oslc_rm="http://open-services.net/xmlns/rm/1.0/"
-    xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/"
-	xmlns:oslc_config="http://open-services.net/ns/config#"
-	xmlns:jp="http://jazz.net/xmlns/prod/jazz/process/1.0/"
-	xmlns:jp06="http://jazz.net/xmlns/prod/jazz/process/0.6/"
-    xmlns:trs="http://open-services.net/ns/core/trs#"
-    xmlns:dc="http://purl.org/dc/terms/"
-    xmlns:jfs="http://jazz.net/xmlns/prod/jazz/jfs/1.0/" 
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-
-	<!--
-	<rdf:Description
-		xmlns:jd="http://jazz.net/xmlns/prod/jazz/discovery/1.0/"
-		xmlns:jdb="http://jazz.net/xmlns/prod/jazz/dashboard/1.0/"
-
-
-		xmlns:jtp="http://jazz.net/xmlns/prod/jazz/jtp/0.6/"
-		xmlns:ju="http://jazz.net/ns/ui#"
-		xmlns:rm="http://www.ibm.com/xmlns/rdm/rdf/"
-		xmlns:oslc_rm="http://open-services.net/xmlns/rm/1.0/"
-		xmlns:trs2="http://open-services.net/ns/core/trs#"
-		rdf:about="https://46.101.127.78:9443/rm/rootservices">
-
-	 <rdf:Description
-		 xmlns:jtp="http://jazz.net/xmlns/prod/jazz/jtp/0.6/"
-		 xmlns:jd="http://jazz.net/xmlns/prod/jazz/discovery/1.0/"
-		 xmlns:ju="http://jazz.net/ns/ui#"
-		 xmlns:jdb="http://jazz.net/xmlns/prod/jazz/dashboard/1.0/"
-		 xmlns:rqm="http://jazz.net/xmlns/prod/jazz/rqm/qm/1.0/"
-		 xmlns:qm_rqm="http://jazz.net/ns/qm/rqm#"
-		 xmlns:trs="http://jazz.net/ns/trs#"
-		 xmlns:trs2="http://open-services.net/ns/core/trs#"
-		 rdf:about="https://46.101.127.78:9443/qm/rootservices">
-	-->
+				 xmlns:iotp="http://jazz.net/ns/dm/iotp#"
+				 xmlns:oslc="http://open-services.net/ns/core#"
+				 xmlns:oslc_am="http://open-services.net/ns/am#"
+				 xmlns:oslc_rm="http://open-services.net/xmlns/rm/1.0/"
+				 xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/"
+				 xmlns:oslc_config="http://open-services.net/ns/config#"
+				 xmlns:jp="http://jazz.net/xmlns/prod/jazz/process/1.0/"
+				 xmlns:jp06="http://jazz.net/xmlns/prod/jazz/process/0.6/"
+				 xmlns:trs="http://open-services.net/ns/core/trs#"
+				 xmlns:dc="http://purl.org/dc/terms/"
+				 xmlns:jfs="http://jazz.net/xmlns/prod/jazz/jfs/1.0/"
+				 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
 	<dc:title>OSLC AM CE4IoTConnector Jazz Root Services</dc:title>
 
 	<!-- Service Providers - ServiceProviderCatalog URLs for each domain -->
-	<oslc_am:amServiceProviders rdf:resource="<%= catalogUri %>" />
-	<oslc_rm:rmServiceProviders rdf:resource="<%= catalogUri %>" />
-	<oslc_cm:cmServiceProviders rdf:resource="<%= catalogUri %>" />
-	<oslc_config:cmServiceProviders	rdf:resource="<%= catalogUri %>"/>
+	<oslc_am:amServiceProviders rdf:resource="<%= catalogUri %>"/>
+	<oslc_rm:rmServiceProviders rdf:resource="<%= catalogUri %>"/>
+	<oslc_cm:cmServiceProviders rdf:resource="<%= catalogUri %>"/>
+	<oslc_config:cmServiceProviders rdf:resource="<%= baseUri + "/services/oslc_config" %>"/>
 
 	<!-- OAuth URLs for establishing server-to-server connections -->
 	<jfs:oauthRealmName>IoTPlatform</jfs:oauthRealmName>
 	<jfs:oauthDomain><%= oauthDomain %></jfs:oauthDomain>
-	<jfs:oauthRequestConsumerKeyUrl rdf:resource="<%= baseUri + "/services/oauth/requestKey" %>" />
-	<jfs:oauthApprovalModuleUrl rdf:resource="<%= baseUri + "/services/oauth/approveKey" %>" />
+	<jfs:oauthRequestConsumerKeyUrl rdf:resource="<%= baseUri + "/services/oauth/requestKey" %>"/>
+	<jfs:oauthApprovalModuleUrl rdf:resource="<%= baseUri + "/services/oauth/approveKey" %>"/>
 	<jfs:oauthRequestTokenUrl rdf:resource="<%= baseUri + "/services/oauth/requestToken" %>"/>
-	<jfs:oauthUserAuthorizationUrl rdf:resource="<%= baseUri + "/services/oauth/authorize" %>" />
+	<jfs:oauthUserAuthorizationUrl rdf:resource="<%= baseUri + "/services/oauth/authorize" %>"/>
 	<jfs:oauthAccessTokenUrl rdf:resource="<%= baseUri + "/services/oauth/accessToken" %>"/>
+
+	<oslc:publisher rdf:resource="<%= baseUri + "/services/oslc_config/publisher" %>" />
 
 	<!-- IoT Platform Tracked Resource Set Provider -->
 	<iotp:TrackedResourceSetProvider>
 		<trs:TrackedResourceSet>
-			<trs:trackedResourceSet rdf:resource="<%= baseUri + "/services/trs" %>" />
-	        <dc:title>iotp-adaptor TRS resources</dc:title>
-	        <dc:description>TRS 2.0 provider for IoT Platform resources</dc:description>
-	        <dc:type     rdf:resource="http://open-services.net/ns/cm#" />
-	        <oslc:domain rdf:resource="http://open-services.net/ns/rm#" />
-	        <oslc:domain rdf:resource="http://open-services.net/ns/am#" />
-        </trs:TrackedResourceSet>
-	</iotp:TrackedResourceSetProvider>		
+			<trs:trackedResourceSet rdf:resource="<%= baseUri + "/services/trs" %>"/>
+			<dc:title>iotp-adaptor TRS resources</dc:title>
+			<dc:description>TRS 2.0 provider for IoT Platform resources</dc:description>
+			<dc:type rdf:resource="http://open-services.net/ns/cm#"/>
+			<oslc:domain rdf:resource="http://open-services.net/ns/rm#"/>
+			<oslc:domain rdf:resource="http://open-services.net/ns/am#"/>
+		</trs:TrackedResourceSet>
+	</iotp:TrackedResourceSetProvider>
 </rdf:Description>

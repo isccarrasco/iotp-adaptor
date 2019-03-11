@@ -55,8 +55,7 @@ import com.ibm.oslc.adaptor.iotp.services.IoTPlatformService;
 
 public class IotpServiceProvidersFactory
 {
-    private static Class<?>[] RESOURCE_CLASSES =
-    {
+    private static Class<?>[] RESOURCE_CLASSES = {
         IoTPlatformService.class
     };
 
@@ -65,7 +64,9 @@ public class IotpServiceProvidersFactory
         super();
     }
 
-    public static CustomServiceProvider createServiceProvider(final String baseURI, final String title, final String description, final Publisher publisher, final Map<String,Object> parameterValueMap)
+    public static CustomServiceProvider createServiceProvider(final String baseURI, final String title,
+                                                              final String description, final Publisher publisher,
+                                                              final Map<String,Object> parameterValueMap)
            throws OslcCoreApplicationException, URISyntaxException
     {
         final ServiceProvider sp = ServiceProviderFactory.createServiceProvider(baseURI,
@@ -83,8 +84,7 @@ public class IotpServiceProvidersFactory
         URI detailsURIs[] = {new URI(baseURI)};
         serviceProvider.setDetails(detailsURIs);
 
-        final PrefixDefinition[] prefixDefinitions =
-        {
+        final PrefixDefinition[] prefixDefinitions = {
             new PrefixDefinition(OslcConstants.DCTERMS_NAMESPACE_PREFIX, new URI(OslcConstants.DCTERMS_NAMESPACE)),
             new PrefixDefinition(OslcConstants.OSLC_CORE_NAMESPACE_PREFIX, new URI(OslcConstants.OSLC_CORE_NAMESPACE)),
             new PrefixDefinition(OslcConstants.OSLC_DATA_NAMESPACE_PREFIX, new URI(OslcConstants.OSLC_DATA_NAMESPACE)),

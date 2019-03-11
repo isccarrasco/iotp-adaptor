@@ -23,9 +23,15 @@ import java.util.TreeSet;
 @OslcResourceShape(title = "OSLC Service Provider Resource Shape", describes = OslcConstants.TYPE_SERVICE_PROVIDER)
 public class CustomServiceProvider extends ServiceProvider {
 
+    private String globalConfigurationAware;
+    private Boolean supportContributionsToLinkIndexProvider;
+    private Boolean supportLinkDiscoveryViaLinkIndexProvider;
+    private Boolean supportOSLCSimpleQuery;
+    private final SortedSet<URI> consumerRegistry = new TreeSet<URI>();
+
     public CustomServiceProvider() throws URISyntaxException {
         super();
-        this.setGlobalConfigurationAware("compatible");
+        this.setGlobalConfigurationAware("yes");
         this.setSupportContributionsToLinkIndexProvider(Boolean.TRUE);
         this.setSupportLinkDiscoveryViaLinkIndexProvider(Boolean.TRUE);
         this.setSupportOSLCSimpleQuery(Boolean.TRUE);
@@ -45,12 +51,6 @@ public class CustomServiceProvider extends ServiceProvider {
         super.setTypes(sp.getTypes());
         super.setExtendedProperties(sp.getExtendedProperties());
     }
-
-    private String globalConfigurationAware;
-    private Boolean supportContributionsToLinkIndexProvider;
-    private Boolean supportLinkDiscoveryViaLinkIndexProvider;
-    private Boolean supportOSLCSimpleQuery;
-    private final SortedSet<URI> consumerRegistry = new TreeSet<URI>();
 
     @OslcDescription("The globalConfigurationAware.")
     //@OslcOccurs(Occurs.ZeroOrOne)

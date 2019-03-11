@@ -107,6 +107,16 @@ public class ServiceProviderCatalogSingleton
         }
     }
 
+    private static URI constructCofigurationServiceProviderURI(final String oslc_config)
+    {
+        String basePath = OSLC4JUtils.getServletURI();
+        Map<String, Object> pathParameters = new HashMap<String, Object>();
+        pathParameters.put("oslc_config", oslc_config);
+        String instanceURI = "{oslc_config}";
+
+        final UriBuilder builder = UriBuilder.fromUri(basePath);
+        return builder.path(instanceURI).buildFromMap(pathParameters);
+    }
 
     private static URI constructIotpServiceProviderURI(final String iotId)
     {
@@ -164,6 +174,26 @@ public class ServiceProviderCatalogSingleton
         }
     }
 
+    private static CustomServiceProvider registerConfigurationServiceProviderNoSync(final URI serviceProviderURI,
+                                                                           final CustomServiceProvider serviceProvider
+            , final String iotId)
+    {
+        final SortedSet<URI> serviceProviderDomains = getServiceProviderDomains(serviceProvider);
+
+        String identifier = iotpServiceProviderIdentifier(iotId);
+        serviceProvider.setAbout(serviceProviderURI);
+        serviceProvider.setIdentifier(identifier);
+        serviceProvider.setCreated(new Date());
+        serviceProvider.setDetails(new URI[] {serviceProviderURI});
+
+        serviceProviderCatalog.addServiceProvider(serviceProvider);
+        serviceProviderCatalog.addDomains(serviceProviderDomains);
+
+        serviceProviders.put(identifier, serviceProvider);
+
+        return serviceProvider;
+    }
+
     /**
     * Register a service provider with the OSLC catalog
     *
@@ -190,6 +220,15 @@ public class ServiceProviderCatalogSingleton
         serviceProviders.put(identifier, serviceProvider);
 
         return serviceProvider;
+    }
+
+    static CustomServiceProvider registerCongifurationServiceProvider(final CustomServiceProvider serviceProvider, final String iotId) {
+        synchronized(serviceProviders)
+        {
+            final URI serviceProviderURI = constructCofigurationServiceProviderURI(iotId);
+
+            return registerConfigurationServiceProviderNoSync(serviceProviderURI, serviceProvider, iotId);
+        }
     }
 
     // This version is for self-registration and thus package-protected
@@ -431,6 +470,22 @@ public class ServiceProviderCatalogSingleton
                     registerBmxServiceProvider(aServiceProvider, serviceProviderInfo.bmxId);
                 }
             }
+
+//            String identifier = iotpServiceProviderIdentifier("oslc_config");
+//            if (!serviceProviders.containsKey(identifier)) {
+//                String serviceProviderName = "OSLC Global Configuration Example";
+//                String title = String.format("Service Provider '%s'", serviceProviderName);
+//                String description = String.format("%s (id: %s; kind: %s)",
+//                        "GC Service Provider",
+//                        identifier,
+//                        "GC Service Provider");
+//                Publisher publisher = null;
+//                Map<String, Object> parameterMap = new HashMap<String, Object>();
+//                parameterMap.put("oslc_config", "oslc_config");
+//                final CustomServiceProvider aServiceProvider = ConfigurationServiceProvidersFactory.createServiceProvider(basePath, title, description, publisher, parameterMap);
+//                // registerIotpServiceProvider(aServiceProvider, "oslc_config");
+//                registerCongifurationServiceProvider(aServiceProvider, "oslc_config");
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new WebApplicationException(e,Status.INTERNAL_SERVER_ERROR);

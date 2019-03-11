@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 
 
+import com.ibm.oslc.adaptor.iotp.services.GlobalConfigurationService;
 import org.eclipse.lyo.oslc4j.application.OslcWinkApplication;
 import org.eclipse.lyo.oslc4j.core.exception.OslcCoreApplicationException;
 import org.eclipse.lyo.oslc4j.core.model.AllowedValues;
@@ -121,11 +122,12 @@ public class Application extends OslcWinkApplication {
         // Catalog resources
         RESOURCE_CLASSES.add(ServiceProviderCatalogService.class);
         RESOURCE_CLASSES.add(BmxServiceProviderService.class);
+        RESOURCE_CLASSES.add(GlobalConfigurationService.class);
         RESOURCE_CLASSES.add(IotpServiceProviderService.class);
         RESOURCE_CLASSES.add(ResourceShapeService.class);
 
         // Start of user code Custom Resource Classes
-        	// OAuth service and Swagger.io service
+        // OAuth service and Swagger.io service
         try {
 			RESOURCE_CLASSES.add(Class.forName("org.eclipse.lyo.server.oauth.webapp.services.ConsumersService"));
 	        RESOURCE_CLASSES.add(Class.forName("org.eclipse.lyo.server.oauth.webapp.services.OAuthService"));
