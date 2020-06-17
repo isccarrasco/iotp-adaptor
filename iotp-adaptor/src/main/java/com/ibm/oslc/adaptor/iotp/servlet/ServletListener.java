@@ -40,7 +40,7 @@ import com.ibm.oslc.adaptor.iotp.CE4IoTConnectorManager;
 // End of user code
 
 public class ServletListener implements ServletContextListener  {
-    private static final String DEFAULT_BASE = "http://localhost:8080";
+    private static final String DEFAULT_BASE = "https://46.101.127.78:8443";
     private static final String PROPERTY_BASE = servletContextParameterName("baseurl");
     private static final Logger logger = Logger.getLogger(ServletListener.class.getName());
 

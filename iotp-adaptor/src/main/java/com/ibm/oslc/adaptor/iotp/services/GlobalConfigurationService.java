@@ -39,6 +39,10 @@ public class GlobalConfigurationService {
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
 
+    private static final String server = "https://46.101.127.78:8443"; // iotp server
+    private static final String client = "https://46.101.127.78:9443"; // clm server
+    private static final String ipAddress ="46.101.127.78";
+
     public GlobalConfigurationService() {
         super();
     }
@@ -52,10 +56,10 @@ public class GlobalConfigurationService {
                 "    xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
                 "    xmlns:oslc=\"http://open-services.net/ns/core#\"\n" +
                 "    xmlns:vvc=\"http://jazz.net/ns/vvc#\">\n" +
-                "    <oslc:ServiceProviderCatalog rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config\">\n" +
+                "    <oslc:ServiceProviderCatalog rdf:about=\""+server+"/iotp/services/oslc_config\">\n" +
                 "        <oslc:serviceProvider>\n" +
-                "            <oslc:ServiceProvider rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config/components\">\n" +
-                "                <oslc:details rdf:resource=\"http://192.168.1.91:8080/iotp/services/oslc_config/components\"/>\n" +
+                "            <oslc:ServiceProvider rdf:about=\""+server+"/iotp/services/oslc_config/components\">\n" +
+                "                <oslc:details rdf:resource=\""+server+"/iotp/services/oslc_config/components\"/>\n" +
                 "                <dcterms:title>RM Configuration Management Service Provider</dcterms:title>\n" +
                 "            </oslc:ServiceProvider>\n" +
                 "        </oslc:serviceProvider>\n" +
@@ -90,7 +94,7 @@ public class GlobalConfigurationService {
                 "            <oslc:Dialog>\n" +
                 "              <dcterms:title>RM Component Configuration Picker</dcterms:title>\n" +
                 "              <oslc:label>RM Component Configuration Picker</oslc:label>\n" +
-                "              <oslc:dialog rdf:resource=\"http://192.168.1.91:8080/iotp/services/oslc_config/selection\"/>\n" +
+                "              <oslc:dialog rdf:resource=\""+server+"/iotp/services/oslc_config/selection\"/>\n" +
                 "              <oslc:hintWidth>600px</oslc:hintWidth>\n" +
                 "              <oslc:hintHeight>500px</oslc:hintHeight>\n" +
                 "              <oslc:resourceType rdf:resource=\"http://jazz.net/ns/vvc#Configuration\"/>\n" +
@@ -123,11 +127,11 @@ public class GlobalConfigurationService {
                 "    xmlns:vvc=\"http://jazz.net/ns/vvc#\"\n" +
                 "    xmlns:j.0=\"http://open-services.net/ns/config#\"\n" +
                 "    xmlns:ldp=\"http://www.w3.org/ns/ldp#\" >\n" +
-                "    <rdf:Description rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config/component/ldpc?project=_h0IhEB9VEem7Xs_lJDl6YQ\">\n" +
+                "    <rdf:Description rdf:about=\""+server+"/iotp/services/oslc_config/component/ldpc?project=_h0IhEB9VEem7Xs_lJDl6YQ\">\n" +
                 "        <rdf:type rdf:resource=\"http://www.w3.org/ns/ldp#BasicContainer\"/>\n" +
-                "        <ldp:contains rdf:resource=\"http://192.168.1.91:8080/iotp/services/oslc_config/component/_iCuWsB9VEem7Xs_lJDl6YQ\"/>\n" +
+                "        <ldp:contains rdf:resource=\""+server+"/iotp/services/oslc_config/component/_iCuWsB9VEem7Xs_lJDl6YQ\"/>\n" +
                 "    </rdf:Description>\n" +
-                "    <rdf:Description rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config/component/_iCuWsB9VEem7Xs_lJDl6YQ\">\n" +
+                "    <rdf:Description rdf:about=\""+server+"/iotp/services/oslc_config/component/_iCuWsB9VEem7Xs_lJDl6YQ\">\n" +
                 "        <rdf:type rdf:resource=\"http://open-services.net/ns/config#Component\"/>\n" +
                 "        <dcterms:title>CLM1-RM-Fabio</dcterms:title>\n" +
                 "    </rdf:Description>\n" +
@@ -149,7 +153,7 @@ public class GlobalConfigurationService {
                 "   xmlns:oslc=\"http://open-services.net/ns/core#\"\n" +
                 "   xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
                 "   xmlns:dcterms=\"http://purl.org/dc/terms/\">\n" +
-                "   <oslc:Publisher  rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config/publisher\">\n" +
+                "   <oslc:Publisher  rdf:about=\""+server+"/iotp/services/oslc_config/publisher\">\n" +
                 "       <dcterms:title>IOTP-Adaptor Project</dcterms:title>\n" +
                 "       <jfs:nonLocalizedTitle>PV Requirements Management</jfs:nonLocalizedTitle>\n" +
                 "       <dcterms:description>This application provides the capabilities to create and manage requirements " +
@@ -182,7 +186,7 @@ public class GlobalConfigurationService {
 
         try {
 
-            httpServletRequest.setAttribute("selectionUri","http://192.168.1.91:8080/iotp/services/oslc_config/selection");
+            httpServletRequest.setAttribute("selectionUri",""+server+"/iotp/services/oslc_config/selection");
 
             if (stream != null ) {
                 httpServletRequest.setAttribute("stream", stream);
@@ -198,17 +202,17 @@ public class GlobalConfigurationService {
 
                 Resource resource = new Resource();
                 resource.setTitle("IoTP Stream Example 1");
-                resource.setAbout(new URI("http://192.168.1.91:8080/iotp/services/oslc_config/stream/1"));
+                resource.setAbout(new URI(""+server+"/iotp/services/oslc_config/stream/1"));
                 resources.add(resource);
 
                 resource = new Resource();
                 resource.setTitle("IoTP Stream Example 2");
-                resource.setAbout(new URI("http://192.168.1.91:8080/iotp/services/oslc_config/stream/2"));
+                resource.setAbout(new URI(""+server+"/iotp/services/oslc_config/stream/2"));
                 resources.add(resource);
 
                 resource = new Resource();
                 resource.setTitle("IoTP Stream Example 3");
-                resource.setAbout(new URI("http://192.168.1.91:8080/iotp/services/oslc_config/stream/3"));
+                resource.setAbout(new URI(""+server+"/iotp/services/oslc_config/stream/3"));
                 resources.add(resource);
 
                 if (resources != null) {
@@ -247,21 +251,21 @@ public class GlobalConfigurationService {
                 "    xmlns:j.0=\"http://jazz.net/ns/rm/dng/config#\"\n" +
                 "    xmlns:acc=\"http://open-services.net/ns/core/acc#\"\n" +
                 "    xmlns:process=\"http://jazz.net/ns/process#\">\n" +
-                "  <oslc_config:Configuration rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config/stream/" + streamid + "\">\n" +
+                "  <oslc_config:Configuration rdf:about=\""+server+"/iotp/services/oslc_config/stream/" + streamid + "\">\n" +
                 "    <dcterms:identifier>" + streamid + "</dcterms:identifier>\n" +
-                "    <oslc_config:selections rdf:resource=\"http://192.168.1.91:8080/iotp/services/oslc_config/configSelections/stream/" + streamid + "\"/>\n" +
+                "    <oslc_config:selections rdf:resource=\""+server+"/iotp/services/oslc_config/configSelections/stream/" + streamid + "\"/>\n" +
                 "    <dcterms:title rdf:parseType=\"Literal\">IoTP Adaptor Initial Stream : Ex-" + streamid + "</dcterms:title>\n" +
                 "    <dcterms:created rdf:datatype=\"http://www.w3.org/2001/XMLSchema#dateTime\">2019-02-15T20:01:22.388Z</dcterms:created>\n" +
-                "    <oslc:serviceProvider rdf:resource=\"http://192.168.1.91:8080/iotp/services/oslc_config/oslc_rm/"+ streamid +"/services.xml\"/>\n" +
+                "    <oslc:serviceProvider rdf:resource=\""+server+"/iotp/services/oslc_config/oslc_rm/"+ streamid +"/services.xml\"/>\n" +
                 "    <rdf:type rdf:resource=\"http://open-services.net/ns/config#Stream\"/>\n" +
-                "    <process:projectArea rdf:resource=\"http://192.168.1.91:8080/iotp/services/catalog/singleton\"/>\n" +
-                "    <j.0:changesets rdf:resource=\"http://192.168.1.91:8080/iotp/services/oslc_config/stream/" + streamid + "/changesets\"/>\n" +
-                "    <dcterms:creator rdf:resource=\"https://46.101.103.36:9443/jts/users/koneksys\"/>\n" +
-                "    <oslc_config:component rdf:resource=\"http://192.168.1.91:8080/iotp/services/catalog/singleton\"/>\n" +
+                "    <process:projectArea rdf:resource=\""+server+"/iotp/services/catalog/singleton\"/>\n" +
+                "    <j.0:changesets rdf:resource=\""+server+"/iotp/services/oslc_config/stream/" + streamid + "/changesets\"/>\n" +
+                "    <dcterms:creator rdf:resource=\""+client+"/jts/users/koneksys\"/>\n" +
+                "    <oslc_config:component rdf:resource=\""+server+"/iotp/services/catalog/singleton\"/>\n" +
                 "    <dcterms:description></dcterms:description>\n" +
-                "    <acc:accessContext rdf:resource=\"http://192.168.1.91:8080/iotp/services/oslc_config/stream/acclist/" + streamid + "\"/>\n" +
+                "    <acc:accessContext rdf:resource=\""+server+"/iotp/services/oslc_config/stream/acclist/" + streamid + "\"/>\n" +
                 "    <oslc_config:acceptedBy rdf:resource=\"http://open-services.net/ns/config#Configuration\"/>\n" +
-                "    <oslc_config:baselines rdf:resource=\"http://192.168.1.91:8080/iotp/services/oslc_config/stream/" + streamid + "/baselines\"/>\n" +
+                "    <oslc_config:baselines rdf:resource=\""+server+"/iotp/services/oslc_config/stream/" + streamid + "/baselines\"/>\n" +
                 "  </oslc_config:Configuration>\n" +
                 "</rdf:RDF>");
 
@@ -282,28 +286,28 @@ public class GlobalConfigurationService {
                 "    xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
                 "    xmlns:oslc_config=\"http://open-services.net/ns/config#\"\n" +
                 "    xmlns:ldp=\"http://www.w3.org/ns/ldp#\">\n" +
-                "  <ldp:DirectContainer rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config/configSelections/stream/_d4bccDFcEem2yvMwWQFZKg\">\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBduoTFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdumzFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <ldp:membershipResource rdf:resource=\"https://46.101.103.36:9443/rm/configSelections/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBduojFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBduqDFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdupzFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBduoDFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "  <ldp:DirectContainer rdf:about=\""+server+"/iotp/services/oslc_config/configSelections/stream/_d4bccDFcEem2yvMwWQFZKg\">\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBduoTFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdumzFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <ldp:membershipResource rdf:resource=\""+client+"/rm/configSelections/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBduojFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBduqDFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdupzFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBduoDFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
                 "    <ldp:hasMemberRelation rdf:resource=\"http://open-services.net/ns/config#selects\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBduqjFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBduozFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdunzFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBduqzFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdupjFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdunTFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdunDFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBduqjFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBduozFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdunzFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBduqzFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdupjFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdunTFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdunDFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
                 "    <rdf:type rdf:resource=\"http://open-services.net/ns/config#Selections\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdupTFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdunjFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdumjFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBdupDFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
-                "    <oslc_config:selects rdf:resource=\"https://46.101.103.36:9443/rm/versionedShapes/_iBduqTFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdupTFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdunjFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdumjFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBdupDFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
+                "    <oslc_config:selects rdf:resource=\""+client+"/rm/versionedShapes/_iBduqTFcEem2yvMwWQFZKg/configuration/cm/stream/_d4bccDFcEem2yvMwWQFZKg\"/>\n" +
                 "  </ldp:DirectContainer>\n" +
                 "</rdf:RDF>\n");
 
@@ -323,18 +327,18 @@ public class GlobalConfigurationService {
                 "  <oslc_rm:ServiceDescriptor " +
                 "   xmlns:oslc_rm=\"http://open-services.net/xmlns/rm/1.0/\" " +
                 "   xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" " +
-                "   rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config/oslc_rm/\"+ streamid +\"/services.xml\">\n" +
+                "   rdf:about=\""+server+"/iotp/services/oslc_config/oslc_rm/\"+ streamid +\"/services.xml\">\n" +
                 "    <oslc_rm:links>\n" +
                 "      <oslc_rm:LinkCreationServices>\n" +
-                "        <oslc_rm:validatedByLinkFactory rdf:resource=\"https://46.101.103.36:9443/rm/links/oslc/validatedByLinks\"/>\n" +
-                "        <oslc_rm:implementedByLinkFactory rdf:resource=\"https://46.101.103.36:9443/rm/links/oslc/implementedByLinks\"/>\n" +
+                "        <oslc_rm:validatedByLinkFactory rdf:resource=\""+client+"/rm/links/oslc/validatedByLinks\"/>\n" +
+                "        <oslc_rm:implementedByLinkFactory rdf:resource=\""+client+"/rm/links/oslc/implementedByLinks\"/>\n" +
                 "      </oslc_rm:LinkCreationServices>\n" +
                 "    </oslc_rm:links>\n" +
                 "    <oslc_rm:collections>\n" +
                 "      <oslc_rm:CollectionSelectionDialog>\n" +
                 "        <oslc_rm:heightHint>550px</oslc_rm:heightHint>\n" +
                 "        <oslc_rm:widthHint>800px</oslc_rm:widthHint>\n" +
-                "        <oslc_rm:widget rdf:resource=\"https://46.101.103.36:9443/rm/pickers/com.ibm.rdm.web.CollectionPicker?projectURL=https%3A%2F%2F46.101.103.36%3A9443%2Frm%2Frm-projects%2F_dm_uMDFcEem2yvMwWQFZKg\"/>\n" +
+                "        <oslc_rm:widget rdf:resource=\""+client+"/rm/pickers/com.ibm.rdm.web.CollectionPicker?projectURL=https%3A%2F%2F"+ipAddress+"%3A9443%2Frm%2Frm-projects%2F_dm_uMDFcEem2yvMwWQFZKg\"/>\n" +
                 "        <dc:title xmlns:dc=\"http://purl.org/dc/terms/\">Collection Selection</dc:title>\n" +
                 "      </oslc_rm:CollectionSelectionDialog>\n" +
                 "    </oslc_rm:collections>\n" +
@@ -342,7 +346,7 @@ public class GlobalConfigurationService {
                 "      <oslc_rm:SelectionDialog>\n" +
                 "        <oslc_rm:heightHint>550px</oslc_rm:heightHint>\n" +
                 "        <oslc_rm:widthHint>800px</oslc_rm:widthHint>\n" +
-                "        <oslc_rm:widget rdf:resource=\"https://46.101.103.36:9443/rm/pickers/com.ibm.rdm.web.RRCPicker?projectURL=https%3A%2F%2F46.101.103.36%3A9443%2Frm%2Frm-projects%2F_dm_uMDFcEem2yvMwWQFZKg\"/>\n" +
+                "        <oslc_rm:widget rdf:resource=\""+client+"/rm/pickers/com.ibm.rdm.web.RRCPicker?projectURL=https%3A%2F%2F"+ipAddress+"%3A9443%2Frm%2Frm-projects%2F_dm_uMDFcEem2yvMwWQFZKg\"/>\n" +
                 "        <dc:title xmlns:dc=\"http://purl.org/dc/terms/\">Requirement Selection</dc:title>\n" +
                 "      </oslc_rm:SelectionDialog>\n" +
                 "    </oslc_rm:requirements>\n" +
@@ -365,18 +369,18 @@ public class GlobalConfigurationService {
                 "  <oslc_rm:ServiceDescriptor " +
                 "   xmlns:oslc_rm=\"http://open-services.net/xmlns/rm/1.0/\" " +
                 "   xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" " +
-                "   rdf:about=\"http://192.168.1.91:8080/iotp/services/oslc_config/oslc_rm/\"+ streamid +\"/services.xml\">\n" +
+                "   rdf:about=\""+server+"/iotp/services/oslc_config/oslc_rm/\"+ streamid +\"/services.xml\">\n" +
                 "    <oslc_rm:links>\n" +
                 "      <oslc_rm:LinkCreationServices>\n" +
-                "        <oslc_rm:validatedByLinkFactory rdf:resource=\"https://46.101.103.36:9443/rm/links/oslc/validatedByLinks\"/>\n" +
-                "        <oslc_rm:implementedByLinkFactory rdf:resource=\"https://46.101.103.36:9443/rm/links/oslc/implementedByLinks\"/>\n" +
+                "        <oslc_rm:validatedByLinkFactory rdf:resource=\""+client+"/rm/links/oslc/validatedByLinks\"/>\n" +
+                "        <oslc_rm:implementedByLinkFactory rdf:resource=\""+client+"/rm/links/oslc/implementedByLinks\"/>\n" +
                 "      </oslc_rm:LinkCreationServices>\n" +
                 "    </oslc_rm:links>\n" +
                 "    <oslc_rm:collections>\n" +
                 "      <oslc_rm:CollectionSelectionDialog>\n" +
                 "        <oslc_rm:heightHint>550px</oslc_rm:heightHint>\n" +
                 "        <oslc_rm:widthHint>800px</oslc_rm:widthHint>\n" +
-                "        <oslc_rm:widget rdf:resource=\"https://46.101.103.36:9443/rm/pickers/com.ibm.rdm.web.CollectionPicker?projectURL=https%3A%2F%2F46.101.103.36%3A9443%2Frm%2Frm-projects%2F_dm_uMDFcEem2yvMwWQFZKg\"/>\n" +
+                "        <oslc_rm:widget rdf:resource=\""+client+"/rm/pickers/com.ibm.rdm.web.CollectionPicker?projectURL=https%3A%2F%2F"+ipAddress+"%3A9443%2Frm%2Frm-projects%2F_dm_uMDFcEem2yvMwWQFZKg\"/>\n" +
                 "        <dc:title xmlns:dc=\"http://purl.org/dc/terms/\">Collection Selection</dc:title>\n" +
                 "      </oslc_rm:CollectionSelectionDialog>\n" +
                 "    </oslc_rm:collections>\n" +
@@ -384,7 +388,7 @@ public class GlobalConfigurationService {
                 "      <oslc_rm:SelectionDialog>\n" +
                 "        <oslc_rm:heightHint>550px</oslc_rm:heightHint>\n" +
                 "        <oslc_rm:widthHint>800px</oslc_rm:widthHint>\n" +
-                "        <oslc_rm:widget rdf:resource=\"https://46.101.103.36:9443/rm/pickers/com.ibm.rdm.web.RRCPicker?projectURL=https%3A%2F%2F46.101.103.36%3A9443%2Frm%2Frm-projects%2F_dm_uMDFcEem2yvMwWQFZKg\"/>\n" +
+                "        <oslc_rm:widget rdf:resource=\""+client+"/rm/pickers/com.ibm.rdm.web.RRCPicker?projectURL=https%3A%2F%2F"+ipAddress+"%3A9443%2Frm%2Frm-projects%2F_dm_uMDFcEem2yvMwWQFZKg\"/>\n" +
                 "        <dc:title xmlns:dc=\"http://purl.org/dc/terms/\">Requirement Selection</dc:title>\n" +
                 "      </oslc_rm:SelectionDialog>\n" +
                 "    </oslc_rm:requirements>\n" +
@@ -420,7 +424,7 @@ public class GlobalConfigurationService {
                 "    },\n" +
                 "    \"@graph\": [\n" +
                 "        {\n" +
-                "            \"id\": \"https:\\/\\/46.101.103.36:9443\\/rm\\/acclist\",\n" +
+                "            \"id\": \"https:\\/\\/"+client+":9443\\/rm\\/acclist\",\n" +
                 "            \"tool\": {\n" +
                 "                \"@id\": \"clm_acc:Rm\"\n" +
                 "            },\n" +
@@ -429,7 +433,7 @@ public class GlobalConfigurationService {
                 "        {\n" +
                 "            \"contextId\": \"_MsFggALeEemG5v5KJUYxpQ\",\n" +
                 "            \"description\": \"\",\n" +
-                "            \"id\": \"https:\\/\\/46.101.103.36:9443\\/rm\\/acclist#_MsFggALeEemG5v5KJUYxpQ\",\n" +
+                "            \"id\": \"https:\\/\\/"+client+":9443\\/rm\\/acclist#_MsFggALeEemG5v5KJUYxpQ\",\n" +
                 "            \"isPublic\": false,\n" +
                 "            \"title\": \"CLM2 RM PA-1A\",\n" +
                 "            \"type\": [\n" +
@@ -440,7 +444,7 @@ public class GlobalConfigurationService {
                 "        {\n" +
                 "            \"contextId\": \"_mhlIwBjgEem2Z4Ia58vF_A\",\n" +
                 "            \"description\": \"\",\n" +
-                "            \"id\": \"https:\\/\\/46.101.103.36:9443\\/rm\\/acclist#_mhlIwBjgEem2Z4Ia58vF_A\",\n" +
+                "            \"id\": \"https:\\/\\/"+client+":9443\\/rm\\/acclist#_mhlIwBjgEem2Z4Ia58vF_A\",\n" +
                 "            \"isPublic\": false,\n" +
                 "            \"title\": \"Victor CLM2 playground with Configurations\",\n" +
                 "            \"type\": [\n" +
@@ -451,7 +455,7 @@ public class GlobalConfigurationService {
                 "        {\n" +
                 "            \"contextId\": \"_keVUYBntEemODtq02xa0dw\",\n" +
                 "            \"description\": \"\",\n" +
-                "            \"id\": \"https:\\/\\/46.101.103.36:9443\\/rm\\/acclist#_keVUYBntEemODtq02xa0dw\",\n" +
+                "            \"id\": \"https:\\/\\/"+client+":9443\\/rm\\/acclist#_keVUYBntEemODtq02xa0dw\",\n" +
                 "            \"isPublic\": false,\n" +
                 "            \"title\": \"Victor RM-CLM2 Demo Project without configs\",\n" +
                 "            \"type\": [\n" +
@@ -462,7 +466,7 @@ public class GlobalConfigurationService {
                 "        {\n" +
                 "            \"contextId\": \"_FeovwBnyEemODtq02xa0dw\",\n" +
                 "            \"description\": \"\",\n" +
-                "            \"id\": \"https:\\/\\/46.101.103.36:9443\\/rm\\/acclist#_FeovwBnyEemODtq02xa0dw\",\n" +
+                "            \"id\": \"https:\\/\\/"+client+":9443\\/rm\\/acclist#_FeovwBnyEemODtq02xa0dw\",\n" +
                 "            \"isPublic\": false,\n" +
                 "            \"title\": \"Victor RM-CLM2 Demo Project WITH configs\",\n" +
                 "            \"type\": [\n" +
@@ -473,7 +477,7 @@ public class GlobalConfigurationService {
                 "        {\n" +
                 "            \"contextId\": \"_h0IhEB9VEem7Xs_lJDl6YQ\",\n" +
                 "            \"description\": \"\",\n" +
-                "            \"id\": \"https:\\/\\/46.101.103.36:9443\\/rm\\/acclist#_h0IhEB9VEem7Xs_lJDl6YQ\",\n" +
+                "            \"id\": \"https:\\/\\/"+client+":9443\\/rm\\/acclist#_h0IhEB9VEem7Xs_lJDl6YQ\",\n" +
                 "            \"isPublic\": false,\n" +
                 "            \"title\": \"CLM1-RM-Fabio\",\n" +
                 "            \"type\": [\n" +
@@ -484,7 +488,7 @@ public class GlobalConfigurationService {
                 "        {\n" +
                 "            \"contextId\": \"_dm_uMDFcEem2yvMwWQFZKg\",\n" +
                 "            \"description\": \"CLM2-RM1-TC3-mario\",\n" +
-                "            \"id\": \"https:\\/\\/46.101.103.36:9443\\/rm\\/acclist#_dm_uMDFcEem2yvMwWQFZKg\",\n" +
+                "            \"id\": \"https:\\/\\/"+client+":9443\\/rm\\/acclist#_dm_uMDFcEem2yvMwWQFZKg\",\n" +
                 "            \"isPublic\": false,\n" +
                 "            \"title\": \"CLM2-RM1-TC3-mario\",\n" +
                 "            \"type\": [\n" +
