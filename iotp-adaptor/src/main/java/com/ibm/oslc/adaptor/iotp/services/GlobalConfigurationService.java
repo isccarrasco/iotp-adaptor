@@ -43,10 +43,9 @@ public class GlobalConfigurationService {
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
 
-    private static final String server = "https://46.101.127.78:8443"; // iotp server
-    private static final String client = "https://46.101.127.78:9443"; // clm server
-    private static final String ipAddress = "46.101.127.78";
-    //private static final String iotpApp = server+"/iotp";
+    private static final String server = "https://192.168.8.100:8443"; // iotp server
+    private static final String client = "https://192.168.8.100:9443"; // clm server
+    private static final String ipAddress = "192.168.8.100";
     private static final String iotpApp = server+"/iotp-0.0.1-SNAPSHOT";
 
     public GlobalConfigurationService() {

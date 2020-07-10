@@ -140,7 +140,7 @@ public class CE4IoTConnectorManager {
         // End of user code
         return resources;
     }
-    public static List<DeviceType> queryDeviceTypes(HttpServletRequest httpServletRequest, final String iotId, String where, int page, int limit)
+    public static List<DeviceType> queryDeviceTypes(HttpServletRequest httpServletRequest, final String iotId, String where, int page, int limit) // ARAS
     {
         List<DeviceType> resources = null;
         
@@ -238,7 +238,7 @@ public class CE4IoTConnectorManager {
         // End of user code
         return resources;
     }
-    public static List<Device> queryDevices(HttpServletRequest httpServletRequest, final String iotId, String where, int page, int limit)
+    public static List<Device> queryDevices(HttpServletRequest httpServletRequest, final String iotId, String where, int page, int limit) // ARAS
     {
         List<Device> resources = null;
         

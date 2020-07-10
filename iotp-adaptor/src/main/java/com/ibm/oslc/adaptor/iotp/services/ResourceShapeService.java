@@ -69,6 +69,7 @@ public class ResourceShapeService
     public ResourceShapeService()
     {
         super();
+	log.info("ResourceShapeService @Path: "+OslcConstants.PATH_RESOURCE_SHAPES);
     }
 
     private OslcResourceShapeResource getOslcResourceShapeResource()

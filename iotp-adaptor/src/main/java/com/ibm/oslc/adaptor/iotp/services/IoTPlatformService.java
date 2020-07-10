@@ -820,7 +820,7 @@ public class IoTPlatformService
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 
-    @OslcDialog
+    @OslcDialog // ARAS
     (
          title = "IotSelectionDialog",
          label = "IoT Platform Selection Dialog",
@@ -851,6 +851,7 @@ public class IoTPlatformService
                 final List<AbstractResource> resources = CE4IoTConnectorManager.RequirementAndChangeRequestAndResourceSelector(httpServletRequest, iotId, terms);
                 if (resources!= null) {
                             httpServletRequest.setAttribute("resources", resources);
+			    // Aqui me quede.
                             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/com/ibm/oslc/adaptor/iotp/iotpselectiondialogselectorresults.jsp");
                             rd.forward(httpServletRequest, httpServletResponse);
                 }

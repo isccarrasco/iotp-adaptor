@@ -288,7 +288,7 @@ public class CredentialsFilter implements Filter {
 				try {
 					// Login to the API Platform
 					log.info("Doing application login: {}", id);
-					IoTPClient iotpClient = new IoTPClient(id, password);
+					IoTPClient iotpClient = new IoTPClient(id, password); // ARAS
 					iotpClient.login();
 					request.setAttribute(IoTPClient.IOTPCLIENT_ATTRIBUTE, iotpClient);
 
