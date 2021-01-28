@@ -299,7 +299,7 @@ public class IoTPClient {
 	 * @throws URISyntaxException
 	 * @throws IOException
 	 */
-	public JsonElement readIoTResource(String orgId, String url) throws URISyntaxException, IOException {
+	public JsonElement readIoTResource(String orgId, String url) throws URISyntaxException, IOException { // ARAS
 		JsonElement result = null;
 
 		StringBuilder sb = new StringBuilder("https://");
@@ -404,7 +404,7 @@ public class IoTPClient {
 	 * @throws Exception 
 	 * @throws IoTFCReSTException
 	 */
-	public JsonArray getOrganizations() throws Exception {
+	public JsonArray getOrganizations() throws Exception { // ARAS: An organization is a ServiceProvider (at IoT), at ARAS a ServiceProvider will be a Product
 		JsonArray result = null;
 		StringBuilder sb = new StringBuilder("https://");
 		sb.append(platformBase).append("/api/").append(apiVersion).append("/auth/organizations");

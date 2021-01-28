@@ -35,8 +35,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.ibm.oslc.adaptor.iotp.resources.CustomServiceProvider;
+import org.eclipse.lyo.client.exception.RootServicesException;
+import org.eclipse.lyo.client.oslc.OSLCConstants;
+import org.eclipse.lyo.client.oslc.jazz.JazzRootServicesHelper;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcDialog;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcQueryCapability;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcService;
@@ -84,7 +89,7 @@ public class IotpServiceProviderService
     @GET
     
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
-    public ServiceProvider[] getServiceProviders()
+    public CustomServiceProvider[] getServiceProviders()
     {
         httpServletResponse.addHeader("Oslc-Core-Version","2.0");
         return ServiceProviderCatalogSingleton.getServiceProviders(httpServletRequest);
@@ -93,13 +98,13 @@ public class IotpServiceProviderService
     /**
      * RDF/XML, XML and JSON representations of a single OSLC Service Provider
      *
-     * @param serviceProviderId
+     * @param iotId
      * @return
      */
     @GET
     @Path("{iotId}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
-    public ServiceProvider getServiceProvider(@PathParam("iotId") final String iotId)
+    public CustomServiceProvider getServiceProvider(@PathParam("iotId") final String iotId)
     {
         httpServletResponse.addHeader("Oslc-Core-Version","2.0");
         return ServiceProviderCatalogSingleton.getIotpServiceProvider(httpServletRequest, iotId);
@@ -110,7 +115,7 @@ public class IotpServiceProviderService
      *
      * Forwards to serviceprovider_html.jsp to create the html document
      *
-     * @param serviceProviderId
+     * @param iotId
      */
     @GET
     @Path("{iotId}")

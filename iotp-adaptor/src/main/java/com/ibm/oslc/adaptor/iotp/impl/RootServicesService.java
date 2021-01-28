@@ -29,6 +29,8 @@ import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import com.ibm.oslc.adaptor.iotp.servlet.ServiceProviderCatalogSingleton;
 import com.ibm.oslc.adaptor.iotp.servlet.ServletListener;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Jazz Root Services Service, see:
@@ -39,6 +41,7 @@ public class RootServicesService extends HttpServlet {
 
 	private static final long serialVersionUID = -8125286361811879744L;
 
+    private static final Logger logger = Logger.getLogger(RootServicesService.class.getName());
 	/**
 	 * Return a Rational Jazz compliant root services document
 	 * 
@@ -46,6 +49,9 @@ public class RootServicesService extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
+        logger.log(Level.INFO, "logger OSLC4JUtils.getPublicURI() "+ OSLC4JUtils.getPublicURI());
+        System.out.println("println logger OSLC4JUtils.getPublicURI() "+ OSLC4JUtils.getPublicURI());
+
         request.setAttribute("baseUri", OSLC4JUtils.getPublicURI());
         request.setAttribute("catalogUri", ServiceProviderCatalogSingleton.getUri().toString());
         request.setAttribute("oauthDomain",OSLC4JUtils.getPublicURI());

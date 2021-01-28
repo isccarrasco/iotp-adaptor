@@ -54,7 +54,7 @@ public class IoTAPIImplementation {
 		int index;
 		try {
 			IoTPClient iotpClient = (IoTPClient)httpServletRequest.getSession().getAttribute(IoTPClient.IOTPCLIENT_ATTRIBUTE);
-			JsonArray orgs = iotpClient.getOrganizations();
+			JsonArray orgs = iotpClient.getOrganizations(); // ARAS
 			spcs = new IotpServiceProviderInfo[orgs.size()];
 			index = 0;
 			for (JsonElement org: orgs) {

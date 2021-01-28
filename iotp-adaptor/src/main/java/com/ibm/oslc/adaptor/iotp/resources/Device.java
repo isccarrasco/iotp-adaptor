@@ -129,8 +129,9 @@ public class Device
 		// IoT Platform resources need to be marked with rdf:types that the CLM apps can link to
 		// All cross-server links are fixed and hard-coded, so we have to do this to create any links
 		// This is also influenced by where the links can be stored - either directly or as backlinks
-		getTypes().add(new URI("http://open-services.net/ns/cm#ChangeRequest"));		
-		getTypes().add(new URI("http://open-services.net/ns/rm#Requirement"));		
+		//getTypes().add(new URI("http://open-services.net/ns/cm#ChangeRequest"));		
+		//getTypes().add(new URI("http://open-services.net/ns/rm#Requirement"));		
+		getTypes().add(new URI("http://aras.com/ns/itemType#Product"));		
 
 		ServiceProvider serviceProvider = ServiceProviderCatalogSingleton.getIotpServiceProvider(httpServletRequest, info.iotId);
 		HashSet<URI> serviceProviders = new HashSet<URI>();
